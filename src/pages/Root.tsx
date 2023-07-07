@@ -1,7 +1,16 @@
 import React from "react";
+import useRouter from "../utils/use-router";
 
-const Root = (): React.ReactNode => {
-  return <>This is Root Page.</>;
-};
+export default function Root() {
+  const { push } = useRouter();
 
-export default Root;
+  const handleClickGoToAboutButton = () => {
+    push("/about");
+  };
+  return (
+    <>
+      <h1>This is Root Page.</h1>
+      <button onClick={handleClickGoToAboutButton}>About</button>
+    </>
+  );
+}

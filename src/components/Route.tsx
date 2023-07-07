@@ -1,15 +1,21 @@
-import React from "react";
+import { ReactNode, JSX, useEffect, useState } from "react";
 
 interface RouteProps {
   path: string;
-  component: React.ReactNode;
+  component: JSX.Element;
 }
 
-const Route: React.FC<RouteProps> = ({
-  path,
-  component: Component,
-}: RouteProps) => {
-  return <Component />;
-};
+export default function Route({ path, component }: RouteProps) {
+  const [pathName, setPathName] = useState(window.location.pathname);
 
-export default Route;
+  useEffect(() => {
+    const handlePopState = () => setPathName(window.location.pathname);
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+  return pathName === path ? component : null;
+}

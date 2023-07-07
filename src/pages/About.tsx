@@ -1,7 +1,16 @@
 import React from "react";
+import useRouter from "../utils/use-router";
 
-const About = (): React.ReactNode => {
-  return <>This is About Page.</>;
-};
+export default function About() {
+  const { push } = useRouter();
 
-export default About;
+  const handleClickGoToMainButton = () => {
+    push("/");
+  };
+  return (
+    <>
+      <h1>This is About Page.</h1>
+      <button onClick={handleClickGoToMainButton}>Go Main</button>
+    </>
+  );
+}
